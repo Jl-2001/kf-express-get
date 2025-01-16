@@ -18,20 +18,53 @@ function getQuotes() {
     .get('/quotes')
     .then((response) => {
         console.log(
+            'got data from',
             // the actual data lives in the response.data 
             response.data
             //response
         )
-        let quotesFromServer = response.data
-        renderToDOM(quotesFromServer)
+        let quotes = response.data
+        renderToDOM(quotes)
     })
     .catch((error) => {
         console.log(error)
         alert('something went wrong')
     })
-    console.log('in quotes function')
 }
 getQuotes()
+
+
+
+
+
+
+function addQuote(event) {
+    event.preventDefault();
+
+    // we access an input fields input via its value property
+    let quote = document.querySelector('#quoteContent').value
+    let author = document.querySelector('#authorContent').value
+    console.log('inputs: ', quote, author)
+
+    let quoteToAdd = {
+        text: quote,
+        author: author
+    }
+
+    axios
+    .post('/quotes', quoteToAdd)
+    .then((response) => {
+        console.log('successful POST to /quotes', quoteToAdd)
+
+        // clear out the input fields
+        document.querySelector("#quoteContent").value = ''
+        document.querySelector("#authorContent").value = ''
+        getQuotes()
+    })
+    .catch((error) => {
+        console.log('error in POST to /quotes', error);
+})
+}
 
 // axios will call the endpoint, wait for the response, thats what .then means
 //Axios lets us call from the front end.
@@ -40,21 +73,24 @@ getQuotes()
 //render means i want to show data on the dom,
 // so we will render data on the dom
 
+//to show data on the dom, we use dom = render
+// in index.html, we will need to create something
+// that will have an id
 
 //in index html ill need to create something 
 // the thing will need to have an id
 // some piece of daataa needs too get appended
 
 function renderToDOM(quotes) {
-    let contentDiv = 
-        document.querySelector('#content')
+    let contentDiv = document.querySelector('#content')
     contentDiv.innerHTML = ''
     for (let quote of quotes) {
         contentDiv.innerHTML += `
         <p> "${quote.text}" -${quote.author}</p>
         `
     }
-
     console.log('in renderToDOM')
 }
+
+
 // we get id with a hashtag when we use queryselector
