@@ -13,7 +13,7 @@
 // we will need to add some boilerplate to get this plumbing aligned again
 const express = require('express');
 const router = express.Router();
-const quoteList = require('../modules/quotes');
+let quoteList = require('../modules/quotes');
 
 // we will have acces to this router via this variable 
 
@@ -56,6 +56,15 @@ router.delete('/:id', (req,res) => {
     // Number is a contructor method
     let id = Number(req.params.id)
     console.log('req.param is :', id)
+    function deleteBody(quote, i) {
+        // item checks each time in the array
+        if(i === (id)) {
+            return false
+        } 
+        return true
+    }
+    quoteList = quoteList.filter(deleteBody)
+    console.log(' the quote list deleted was', quoteList)
     // function deleteQuotes(quote, i) {
     // // does this quote have the id that i want to delete?
     // // if yes, im gonna delete if, ifno, im gonna keep it
