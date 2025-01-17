@@ -1,3 +1,4 @@
+
 console.log("hello world");
 
 //Axios lives on the client side, 
@@ -80,16 +81,39 @@ function addQuote(event) {
 //in index html ill need to create something 
 // the thing will need to have an id
 // some piece of daataa needs too get appended
+function deleteQuote(quote, i) {
+    console.log('running in delete quote')
+    console.log('the click index is: ', i)
+    
+    axios.delete(`/quotes/${i}`)
+    .then(response => {
+        console.log('successfully delete quote')
+        getQuotes()
+        // refresh the dom with the new array
+    })
+    .catch(error => {
+        console.log('error deleting quote')
+    })
+}
+
 
 function renderToDOM(quotes) {
     let contentDiv = document.querySelector('#content')
     contentDiv.innerHTML = ''
-    for (let quote of quotes) {
+
+    // we will no longer use the for loop, we will use for each
+    quotes.forEach((quote, index ) => {
         contentDiv.innerHTML += `
-        <p> "${quote.text}" -${quote.author}</p>
+        <p> ${quote.text}" -${quote.author}</p> <button onclick = "deleteQuote${index}()> Delete </button>
         `
-    }
-    console.log('in renderToDOM')
+     })
+
+    //for (let quote of quotes) {
+        // contentDiv.innerHTML += `
+        // <p> "${quote.text}" -${quote.author}</p> <button onclick = "deleteQuote()>
+        // `
+  //  }
+    // console.log('in renderToDOM')
 }
 
 

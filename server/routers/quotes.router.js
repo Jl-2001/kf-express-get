@@ -51,10 +51,32 @@ router.post('/', (req,res) => {
 
 
 
-router.delete('/', (req,res) => {
+router.delete('/:id', (req,res) => {
     console.log('DELETE REQUEST SUCCESFUL')
-    
+    // Number is a contructor method
+    let id = Number(req.params.id)
+    console.log('req.param is :', id)
+    // function deleteQuotes(quote, i) {
+    // // does this quote have the id that i want to delete?
+    // // if yes, im gonna delete if, ifno, im gonna keep it
+    // // req.params is always a string
+    // if(i === (id)) {
+    //     return false
+    // }
+    // return true
+    // }
+    // quoteList= quoteList.filter(deleteQuotes)
+    // console.log(quoteList)
+    // // a common way to send back a status of deleted is 204
+    res.sendStatus(204)
 })  
+// we will see a :id
+// example: localhostL5001/quotes/:id (this will be treated as data)
+// no we will beed to delete a quote based on the id number
+// maybe we can use a filter?
+
+
+
 
 //  then we will need to export the router File, like the quotelist
 // we will need module.exports
