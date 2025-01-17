@@ -50,6 +50,12 @@ router.post('/', (req,res) => {
 
 
 
+
+router.delete('/', (req,res) => {
+    console.log('DELETE REQUEST SUCCESFUL')
+    
+})  
+
 //  then we will need to export the router File, like the quotelist
 // we will need module.exports
 module.exports = router;
