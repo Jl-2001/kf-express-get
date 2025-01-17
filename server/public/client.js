@@ -81,7 +81,7 @@ function addQuote(event) {
 //in index html ill need to create something 
 // the thing will need to have an id
 // some piece of daataa needs too get appended
-function deleteQuote(quote, i) {
+function deleteQuote( i) {
     console.log('running in delete quote')
     console.log('the click index is: ', i)
     
