@@ -104,7 +104,7 @@ function renderToDOM(quotes) {
     // we will no longer use the for loop, we will use for each
     quotes.forEach((quote, index ) => {
         contentDiv.innerHTML += `
-        <p> ${quote.text}" -${quote.author}</p> <button onclick = "deleteQuote${index}()> Delete </button>
+        <p> ${quote.text}" -${quote.author}</p> <button onclick="deleteQuote(${index})"> Delete </button>
         `
      })
 
@@ -114,6 +114,7 @@ function renderToDOM(quotes) {
         // `
   //  }
     // console.log('in renderToDOM')
+
 }
 
 
